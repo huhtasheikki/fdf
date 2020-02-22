@@ -6,29 +6,12 @@
 /*   By: hhuhtane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 10:01:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2019/10/31 14:02:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/02/21 11:41:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
-static size_t	ft_array_len(char const *s, char c)
-{
-	size_t		words;
-
-	words = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (*s)
-			words++;
-		while (*s != c && *s)
-			s++;
-	}
-	return (words + 1);
-}
 
 static size_t	ft_str_len(char const *s, char c)
 {
