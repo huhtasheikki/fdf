@@ -6,25 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 12:12:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/05 16:16:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:03:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	int_to_rgb(int color, int *rgb)
-{
-	rgb[2] = color & 0xFF;
-	rgb[1] = (color >> 8) & 0xFF;
-	rgb[0] = (color >> 16) & 0xFF;
-}
-
-int		rgb_to_int(int *rgb)
-{
-	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
-}
-
-int		ft_color(int start, int end, int percent)
+static int		ft_color(int start, int end, int percent)
 {
 	int		start_rgb[3];
 	int		end_rgb[3];
@@ -53,7 +41,7 @@ int		ft_color(int start, int end, int percent)
 	return (rgb_to_int(current_rgb));
 }
 
-void	ft_current_color(t_point *a, t_point *b, t_point *c)
+void			ft_current_color(t_point *a, t_point *b, t_point *c)
 {
 	if (ft_abs(b->iy - a->iy) < ft_abs(b->ix - a->ix))
 	{
@@ -73,4 +61,16 @@ void	ft_current_color(t_point *a, t_point *b, t_point *c)
 			c->color = ft_color(b->color, a->color,
 								get_pct(b->iy, a->iy, c->iy));
 	}
+}
+
+void			int_to_rgb(int color, int *rgb)
+{
+	rgb[2] = color & 0xFF;
+	rgb[1] = (color >> 8) & 0xFF;
+	rgb[0] = (color >> 16) & 0xFF;
+}
+
+int				rgb_to_int(int *rgb)
+{
+	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }

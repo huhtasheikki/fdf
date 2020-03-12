@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:37:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/02/22 10:36:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:01:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ size_t		ft_array_len(char const *s, char c)
 		while (*s != c && *s)
 			s++;
 	}
-return (words + 1);
+	return (words + 1);
 }

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:15:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/05 15:01:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:54:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		ft_assign_dc(t_point *a, t_point *b, t_point *c, t_point *delta)
+static void		ft_assign_dc(t_point *a, t_point *b, t_point *c, t_point *delta)
 {
 	delta->ix = b->ix - a->ix;
 	delta->iy = b->iy - a->iy;
@@ -21,25 +21,21 @@ void		ft_assign_dc(t_point *a, t_point *b, t_point *c, t_point *delta)
 	c->color = a->color;
 }
 
-void		ft_line_low(t_point *a, t_point *b, t_fdf *map)
+static void		ft_line_low(t_point *a, t_point *b, t_fdf *map)
 {
 	t_point		delta;
 	t_point		c;
 	int			y_m;
 	float		der;
 
-	y_m = 1;
 	ft_assign_dc(a, b, &c, &delta);
-	if (delta.iy < 0)
-	{
-		delta.iy = -delta.iy;
-		y_m = -1;
-	}
+	ft_check_move(&delta.iy, &y_m);
 	der = 2 * delta.iy - delta.ix;
 	while (c.ix != b->ix)
 	{
 		ft_current_color(a, b, &c);
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, c.ix, c.iy, c.color);
+		if (c.ix >= 0 && c.ix < WIN_X && c.iy >= 0 && c.iy < WIN_Y)
+			ft_draw_to_img(c.ix, c.iy, c.color, map);
 		if (der > 0)
 		{
 			c.iy += y_m;
@@ -50,25 +46,21 @@ void		ft_line_low(t_point *a, t_point *b, t_fdf *map)
 	}
 }
 
-void		ft_line_high(t_point *a, t_point *b, t_fdf *map)
+static void		ft_line_high(t_point *a, t_point *b, t_fdf *map)
 {
 	t_point		delta;
 	t_point		c;
 	int			x_m;
 	float		der;
 
-	x_m = 1;
 	ft_assign_dc(a, b, &c, &delta);
-	if (delta.ix < 0)
-	{
-		delta.ix = -delta.ix;
-		x_m = -1;
-	}
+	ft_check_move(&delta.ix, &x_m);
 	der = 2 * delta.ix - delta.iy;
 	while (c.iy != b->iy)
 	{
 		ft_current_color(a, b, &c);
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, c.ix, c.iy, c.color);
+		if (c.ix >= 0 && c.ix < WIN_X && c.iy >= 0 && c.iy < WIN_Y)
+			ft_draw_to_img(c.ix, c.iy, c.color, map);
 		if (der > 0)
 		{
 			c.ix += x_m;
@@ -79,7 +71,7 @@ void		ft_line_high(t_point *a, t_point *b, t_fdf *map)
 	}
 }
 
-void		ft_draw_line_ab(t_point *a, t_point *b, t_fdf *map)
+static void		ft_draw_line_ab(t_point *a, t_point *b, t_fdf *map)
 {
 	if (ft_abs(b->iy - a->iy) < ft_abs(b->ix - a->ix))
 	{
@@ -97,7 +89,7 @@ void		ft_draw_line_ab(t_point *a, t_point *b, t_fdf *map)
 	}
 }
 
-void		ft_bresenham_map(t_fdf *map)
+void			ft_bresenham_map(t_fdf *map)
 {
 	size_t		ix;
 	size_t		iy;
@@ -117,4 +109,7 @@ void		ft_bresenham_map(t_fdf *map)
 		iy++;
 		ix = 0;
 	}
+	ft_img_to_win(map);
+	ft_clean_buffer(map);
+	ft_guide(map);
 }

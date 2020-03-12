@@ -5,43 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/21 13:27:05 by hhuhtane          #+#    #+#              #
-#    Updated: 2020/03/12 10:30:50 by hhuhtane         ###   ########.fr        #
+#    Created: 2020/03/11 14:52:52 by hhuhtane          #+#    #+#              #
+#    Updated: 2020/03/12 10:31:07 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = fdf
+NAME = fdf_obj
 
-SRC = src/main.c src/ft_isometric.c src/ft_bresenham.c src/ft_color.c src/ft_tools.c src/ft_press1.c src/ft_press2.c src/ft_press3.c src/ft_press4.c src/ft_read.c src/ft_guide.c src/ft_tools2.c src/ft_press5.c
-
-AFILE = libft/libft.a /usr/local/lib/libmlx.a
+SRC = main.c ft_isometric.c ft_bresenham.c ft_color.c ft_tools.c ft_press1.c ft_press2.c ft_press3.c ft_press4.c ft_read.c ft_guide.c ft_tools2.c ft_press5.c
 
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -c
 
 FRAMEWORK = -o $(NAME) -I includes -framework OpenGL -framework AppKit
-
-LIBFTX = ./libft/libft.a /usr/local/lib/libmlx.a
 
 all: $(NAME)
 
 $(NAME):
-	@make -C libft
-	@make -C src
-	@gcc $(FLAGS) $(OBJ) $(AFILE) $(FRAMEWORK)
-	@echo "READY TO GO!"
+	@gcc $(FLAGS) -c $(SRC) -I ../includes
+	@echo "SOURCES COMPILED TO OBJECTS!"
 
 clean:
-	@make -C libft clean
-	@make -C src clean
-	@rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 	@find . -type f -name '*~' -print -delete -o -name '#*#' -print -delete
-	@echo "Objects cleaned"
+	@echo "SRC/objects cleaned!"
 
 fclean: clean
 	@make -C libft fclean
 	@/bin/rm -f $(NAME)
-	@echo "Totally cleaned"
+	@echo "cleaned"
 
-re:	fclean all
+re: fclean all

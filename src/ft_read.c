@@ -6,25 +6,25 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 16:44:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/06 16:07:02 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/03/12 11:54:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_collect_data(int y, char **split, t_fdf *map)
+static void		ft_collect_data(int y, char **split, t_fdf *map)
 {
 	size_t		i1;
 
 	i1 = 0;
 	while (i1 < map->columns)
 	{
-		map->dot[y][i1].z = ft_atoi(split[i1]);
+		map->dot[y][i1].z = ft_atoi(split[i1]) / map->z_disp;
 		map->dot[y][i1].iz = ft_atoi(split[i1]);
-		if (map->dot[y][i1].iz < map->min_height)
-			map->min_height = map->dot[y][i1].iz;
-		if (map->dot[y][i1].iz > map->max_height)
-			map->max_height = map->dot[y][i1].iz;
+		if (map->dot[y][i1].iz < map->min_z)
+			map->min_z = map->dot[y][i1].iz;
+		if (map->dot[y][i1].iz > map->max_z)
+			map->max_z = map->dot[y][i1].iz;
 		if (ft_strchr(split[i1], ',') == NULL)
 			map->dot[y][i1].color = 0;
 		else
@@ -36,7 +36,7 @@ void	ft_collect_data(int y, char **split, t_fdf *map)
 	ft_memdel((void**)&split);
 }
 
-void	ft_read_first(int fd, t_fdf *map)
+static void		ft_read_first(int fd, t_fdf *map)
 {
 	char		*str;
 	char		**split;
@@ -50,7 +50,7 @@ void	ft_read_first(int fd, t_fdf *map)
 	ft_collect_data(0, split, map);
 }
 
-void	ft_read_rest(int fd, t_fdf *map)
+static void		ft_read_rest(int fd, t_fdf *map)
 {
 	char		*str;
 	char		**split;
@@ -74,13 +74,13 @@ void	ft_read_rest(int fd, t_fdf *map)
 	}
 }
 
-void	ft_read_map(int fd, t_fdf *map)
+static void		ft_read_map(int fd, t_fdf *map)
 {
 	ft_read_first(fd, map);
 	ft_read_rest(fd, map);
 }
 
-void	ft_read_file(int fd, char *file, t_fdf *map)
+void			ft_read_file(int fd, char *file, t_fdf *map)
 {
 	ft_read_rows(fd, map);
 	close(fd);

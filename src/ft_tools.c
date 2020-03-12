@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:56:49 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/06 16:07:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:49:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ int		get_pct(int a, int b, int c)
 		return (100 * current / distance);
 }
 
-void	rotate_x(int x, int y, t_point *a, t_fdf *map)
-{
-	if (map->angle_xy == 0)
-		a->x = x;
-	else
-		a->x = x * cosf(map->angle_xy) + y * sinf(map->angle_xy);
-}
-
-void	rotate_y(int x, int y, t_point *a, t_fdf *map)
-{
-	if (map->angle_xy == 0)
-		a->y = y;
-	else
-		a->y = x * sinf(map->angle_xy) + y * cosf(map->angle_xy);
-}
-
 void	ft_read_rows(int fd, t_fdf *map)
 {
 	char	*str;
@@ -52,4 +36,37 @@ void	ft_read_rows(int fd, t_fdf *map)
 		ft_memdel((void**)&str);
 	}
 	free(str);
+}
+
+void	ft_clean_buffer(t_fdf *map)
+{
+	size_t	i1;
+	size_t	i2;
+	size_t	pixel;
+
+	i1 = 0;
+	i2 = 0;
+	while (i1 < WIN_Y)
+	{
+		while (i2 < WIN_X)
+		{
+			pixel = i1 * map->size_line / 4 + i2;
+			map->buffer[pixel] = map->bg_color;
+			i2++;
+		}
+		i2 = 0;
+		i1++;
+	}
+}
+
+void	ft_rotate_z_axis(t_point *a, t_fdf *map)
+{
+	float	temp_x;
+
+	temp_x = a->x;
+	if (map->angle_z != 0)
+	{
+		a->x = temp_x * cosf(map->angle_z) + a->y * sinf(map->angle_z);
+		a->y = -temp_x * sinf(map->angle_z) + a->y * cosf(map->angle_z);
+	}
 }

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_press4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 14:11:29 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/01/22 18:10:31 by hhuhtane         ###   ########.fr       */
+/*   Created: 2020/03/10 12:38:28 by hhuhtane          #+#    #+#             */
+/*   Updated: 2020/03/10 14:07:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-#include "../libft/libft.h"
-#include "get_next_line.h"
-#include "/usr/local/include/mlx.h"
-#include <stdlib.h>
-
-typedef struct		s_point
+void	ft_press_red(t_fdf *map)
 {
-	int				y;
-	int				x;
-	int				z;
-}					t_point;
+	map->bg_color += 0x110000;
+	ft_bresenham_map(map);
+}
 
-#endif
+void	ft_press_green(t_fdf *map)
+{
+	map->bg_color += 0x1100;
+	ft_bresenham_map(map);
+}
+
+void	ft_press_blue(t_fdf *map)
+{
+	map->bg_color += 0x11;
+	ft_bresenham_map(map);
+}
