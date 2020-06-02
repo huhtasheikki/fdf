@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 14:11:29 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 16:27:25 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:23:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define COLOR_R 6
 # define COLOR_G 7
 # define COLOR_B 8
+# define RESET 15
 
 # define WIN_X 1400
 # define WIN_Y 1200
@@ -109,6 +110,7 @@ void					ft_press_roty_r(t_fdf *map);
 void					ft_press_red(t_fdf *map);
 void					ft_press_green(t_fdf *map);
 void					ft_press_blue(t_fdf *map);
+void					ft_press_reset(t_fdf *map);
 
 void					ft_rotate_x_axis(t_point *a, t_fdf *map);
 void					ft_rotate_y_axis(t_point *a, t_fdf *map);

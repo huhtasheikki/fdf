@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 16:44:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 11:54:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 11:57:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			ft_read_file(int fd, char *file, t_fdf *map)
 {
 	ft_read_rows(fd, map);
 	close(fd);
-	if (!(fd = open(file, O_RDONLY)))
+	if ((fd = open(file, O_RDONLY)) < 0)
 		exit(0);
 	map->dot = (t_point**)malloc(sizeof(t_point*) * map->rows);
 	ft_read_map(fd, map);

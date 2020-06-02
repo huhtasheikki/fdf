@@ -6,7 +6,7 @@
 #    By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:52:52 by hhuhtane          #+#    #+#              #
-#    Updated: 2020/03/12 10:31:07 by hhuhtane         ###   ########.fr        #
+#    Updated: 2020/06/02 12:21:37 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,7 +32,6 @@ clean:
 	@echo "SRC/objects cleaned!"
 
 fclean: clean
-	@make -C libft fclean
 	@/bin/rm -f $(NAME)
 	@echo "cleaned"
 

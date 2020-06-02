@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 12:21:39 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 15:18:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:23:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		press_keyboard(int key, void *param)
 	key == COLOR_R ? ft_press_red(map) : 0;
 	key == COLOR_G ? ft_press_green(map) : 0;
 	key == COLOR_B ? ft_press_blue(map) : 0;
+	key == RESET ? ft_press_reset(map) : 0;
 	return (0);
 }
 

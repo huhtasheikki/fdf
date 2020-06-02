@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:56:49 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 15:49:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:06:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ void	ft_read_rows(int fd, t_fdf *map)
 	while (get_next_line(fd, &str) > 0)
 	{
 		map->rows += 1;
+		map->columns = ft_array_len(str, ' ') - 1;
 		ft_memdel((void**)&str);
 	}
 	free(str);
+	if (map->rows < 2 || map->columns < 2)
+	{
+		ft_putendl("Map is invalid!");
+		exit(0);
+	}
 }
 
 void	ft_clean_buffer(t_fdf *map)

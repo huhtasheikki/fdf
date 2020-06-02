@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 13:58:07 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 15:11:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:15:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		main(int argc, char **argv)
 	int			fd;
 	t_fdf		*map;
 
-	if (argc != 2 || !(fd = open(argv[1], O_RDONLY)))
+	if (argc != 2 || (fd = open(argv[1], O_RDONLY)) < 0)
 	{
 		ft_putendl("fdf source.file");
 		return (0);

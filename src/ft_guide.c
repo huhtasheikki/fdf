@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 12:04:27 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/03/12 16:13:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:26:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void			ft_guide(t_fdf *map)
 	ft_write_win(map, "- ROTATE: with numpads 4, 6, 2, 8, 1, 9", 50, 140);
 	ft_write_win(map, "- PERSPECTIVE: Parallel = 1 | Isometric = 2", 50, 160);
 	ft_write_win(map, "- BACKGROUND: Z = Red, X = Green, C = Blue:", 50, 180);
-	ft_write_win(map, "MOUSE:", 50, 210);
-	ft_write_win(map, "- ZOOM: scroll with wheel button", 50, 230);
+	ft_write_win(map, "- RESET: reset all the values", 50, 200);
+	ft_write_win(map, "MOUSE:", 50, 230);
+	ft_write_win(map, "- ZOOM: scroll with wheel button", 50, 250);
 }
